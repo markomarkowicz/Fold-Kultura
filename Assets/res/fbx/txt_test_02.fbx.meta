@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 3ecadc978c89e41ba806451c52936cac
-timeCreated: 1511473348
+guid: 4b1361948ee7a423eb27548bbc31e5a7
+timeCreated: 1511813950
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
@@ -10,7 +10,6 @@ ModelImporter:
     2300000: //RootNode
     3300000: //RootNode
     4300000: Extrude_1
-    4300002: Null_1
   materials:
     importMaterials: 1
     materialName: 0
@@ -41,10 +40,10 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
-    importVisibility: 0
+    importVisibility: 1
     importBlendShapes: 1
-    importCameras: 0
-    importLights: 0
+    importCameras: 1
+    importLights: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -60,7 +59,7 @@ ModelImporter:
     normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
-    normalCalculationMode: 0
+    normalCalculationMode: 4
   importAnimation: 1
   copyAvatar: 0
   humanDescription:
