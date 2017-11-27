@@ -15,6 +15,12 @@ FONT
 
 
 	*/
+
+	private int page = 0;
+	public GameObject[] pageOnBtn;
+	public GameObject[] pageOffBtn;
+
+
 	public Text textRadi;
 
 	public Transform toysGround;
@@ -54,10 +60,21 @@ FONT
 	public void NextBtn(){
 		anim.SetTrigger ("Next");
 		Debug.Log ("Next Button");
+		nextPage();
+		PageCase ();
+
 	}
+
+
+
+
+
+
 
 	public void BackBtn(){
 		Debug.Log ("Back Button");
+		prevPage ();
+		PageCase ();
 	}
 
 	public void LeftArrowBtn(){
@@ -81,5 +98,77 @@ FONT
 	public void RadiusSlider(float newRadius){
 		setToyRadiusWheel = newRadius;
 	}
+
+	public void nextPage(){
+		if (page < 3) {
+			page++;
+		}
+
+		Debug.Log (page);
+	}
+
+	public void prevPage(){
+		if (page > 0) {
+			page--;
+		}
+		Debug.Log (page);
+
+
+	}
+
+	void PageCase(){
+	
+		switch (page) {
+		case 0:
+			pageOnBtn [0].SetActive (true);
+			pageOnBtn [1].SetActive (false);
+			pageOnBtn [2].SetActive (false);
+			pageOnBtn [3].SetActive (false);
+			pageOffBtn [0].SetActive (false);
+			pageOffBtn [1].SetActive (true);
+			pageOffBtn [2].SetActive (true);
+			pageOffBtn [3].SetActive (true);
+
+			break;
+		case 1:
+			pageOnBtn [0].SetActive (false);
+			pageOnBtn [1].SetActive (true);
+			pageOnBtn [2].SetActive (false);
+			pageOnBtn [3].SetActive (false);
+
+			pageOffBtn [0].SetActive (true);
+			pageOffBtn [1].SetActive (false);
+			pageOffBtn [2].SetActive (true);
+			pageOffBtn [3].SetActive (true);
+			break;
+		case 2:
+			pageOnBtn [0].SetActive (false);
+			pageOnBtn [1].SetActive (false);
+			pageOnBtn [2].SetActive (true);
+			pageOnBtn [3].SetActive (false);
+			pageOffBtn [0].SetActive (true);
+			pageOffBtn [1].SetActive (true);
+			pageOffBtn [2].SetActive (false);
+			pageOffBtn [3].SetActive (true);
+			break;
+		case 3:
+			pageOnBtn [0].SetActive (false);
+			pageOnBtn [1].SetActive (false);
+			pageOnBtn [2].SetActive (false);
+			pageOnBtn [3].SetActive (true);
+			pageOffBtn [0].SetActive (true);
+			pageOffBtn [1].SetActive (true);
+			pageOffBtn [2].SetActive (true);
+			pageOffBtn [3].SetActive (false);
+			break;
+
+		default:
+			Debug.Log ("default");
+			break;
+		}
+	}
+
+
+
 
 }
