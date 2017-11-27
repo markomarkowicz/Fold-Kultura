@@ -10,6 +10,7 @@ ModelImporter:
     2300000: //RootNode
     3300000: //RootNode
     4300000: Extrude_1
+    4300002: Null_1
   materials:
     importMaterials: 1
     materialName: 0
