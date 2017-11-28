@@ -17,6 +17,7 @@ FONT
 	*/
 
 	private int page = 0;
+	public GameObject nextOnBtn, nextOffBtn, BackOnBtn, BackOffBtn;
 	public GameObject[] pageOnBtn;
 	public GameObject[] pageOffBtn;
 
@@ -120,6 +121,12 @@ FONT
 	
 		switch (page) {
 		case 0:
+			nextOnBtn.SetActive (true);
+			nextOffBtn.SetActive (false);
+
+			BackOnBtn.SetActive (false);
+			BackOffBtn.SetActive (true);
+
 			pageOnBtn [0].SetActive (true);
 			pageOnBtn [1].SetActive (false);
 			pageOnBtn [2].SetActive (false);
@@ -131,6 +138,11 @@ FONT
 
 			break;
 		case 1:
+			nextOnBtn.SetActive (true);
+			nextOffBtn.SetActive (false);
+
+			BackOnBtn.SetActive (true);
+			BackOffBtn.SetActive (false);
 			pageOnBtn [0].SetActive (false);
 			pageOnBtn [1].SetActive (true);
 			pageOnBtn [2].SetActive (false);
@@ -142,6 +154,13 @@ FONT
 			pageOffBtn [3].SetActive (true);
 			break;
 		case 2:
+			nextOnBtn.SetActive (true);
+			nextOffBtn.SetActive (false);
+
+
+			BackOnBtn.SetActive (true);
+			BackOffBtn.SetActive (false);
+
 			pageOnBtn [0].SetActive (false);
 			pageOnBtn [1].SetActive (false);
 			pageOnBtn [2].SetActive (true);
@@ -152,6 +171,14 @@ FONT
 			pageOffBtn [3].SetActive (true);
 			break;
 		case 3:
+			
+			nextOnBtn.SetActive (false);
+			nextOffBtn.SetActive (true);
+
+
+			BackOnBtn.SetActive (true);
+			BackOffBtn.SetActive (false);
+
 			pageOnBtn [0].SetActive (false);
 			pageOnBtn [1].SetActive (false);
 			pageOnBtn [2].SetActive (false);
