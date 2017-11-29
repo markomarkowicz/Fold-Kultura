@@ -43,7 +43,7 @@ FONT
 		}
 			setToyRadiusWheel = toyRadiusWheel;
 
-		textRadi.text = "radius = 14.0";
+	//	textRadi.text = "radius = 14.0";
 	}
 	
 	// Update is called once per frame
@@ -90,7 +90,7 @@ FONT
 		Debug.Log ("RadiusChange");
 		for (int j = 0; j < toyPlaceHolders.Length; j++) {
 			toyHolder [j].localPosition = new Vector3 (0, 0, setToyRadiusWheel);
-			textRadi.text = "radius = "+((Mathf.Round(setToyRadiusWheel*10f))/10f).ToString();	
+	//		textRadi.text = "radius = "+((Mathf.Round(setToyRadiusWheel*10f))/10f).ToString();	
 			toysGround.localScale = new Vector3 ((setToyRadiusWheel * 2 + 2), 0.02f, (setToyRadiusWheel * 2 + 2));
 		
 		}
