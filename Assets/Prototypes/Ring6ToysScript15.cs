@@ -16,7 +16,7 @@ public class Ring6ToysScript15 : MonoBehaviour {
 	float nextAngle = 60f;
 	bool animationRun = false;
 	float tableRotation;
-
+	GameObject d;
 	public int rotGear = 1;
 	public Material infoMat;
 
@@ -28,7 +28,9 @@ public class Ring6ToysScript15 : MonoBehaviour {
 		tableRotation = 0;
 		gameObject.transform.localEulerAngles = new Vector3(0, tableRotation, 0);
 
-		for (int i = 0; i < 6; i++) {
+
+		//znaczniki małe zielone cyfry 
+		/*for (int i = 0; i < 6; i++) {
 			nrPrefabControl[i] = Instantiate (toy [i], transform.position, transform.rotation, toyHolder [i].transform)as GameObject;
 			nrPrefabControl [i].transform.localPosition = new Vector3 (-0.3f, 0, 1);
 			nrPrefabControl [i].transform.localEulerAngles = new Vector3 (0, 70, -70);
@@ -36,7 +38,7 @@ public class Ring6ToysScript15 : MonoBehaviour {
 			nrPrefabControl [i].transform.GetComponentInChildren<Renderer> ().material = infoMat;
 
 		}
-
+*/
 
 
 		for (int i = 0; i < 3; i++) {
@@ -93,6 +95,7 @@ public class Ring6ToysScript15 : MonoBehaviour {
 
 	public void BackArrow(){
 		if (!animationRun) {
+			BackToysChange ();
 			StartCoroutine ("RotationMinus");
 		}
 		}
@@ -142,6 +145,14 @@ public class Ring6ToysScript15 : MonoBehaviour {
 		yield return null;
 		animationRun = false;
 	}
+
+
+	public void BackToysChange(){
+		//toyPrefabControl [3].Destroy (Get);
+//		Destroy(toyPrefabControl [rotGear  -3].transform.GetChild(0).gameObject);
+	
+	}
+
 
 	}
 
