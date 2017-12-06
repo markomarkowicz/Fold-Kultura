@@ -21,7 +21,7 @@ public class Ring6ToysScript15 : MonoBehaviour {
 	public Material infoMat;
 
 	void Start () {
-		Debug.Log ("chuj");	
+
 		toyPrefabControl = new GameObject[toyHolder.Length];
 		nrPrefabControl = new GameObject[toyHolder.Length];
 
@@ -42,9 +42,9 @@ public class Ring6ToysScript15 : MonoBehaviour {
 
 
 		for (int i = 0; i < 3; i++) {
-		//	Debug.Log ("j jest kurwa" + j);
+	
 			// % toy.Length;
-		//	Debug.Log ("j jest rowne" + j);
+	
 				toyPrefabControl [i] = Instantiate (toy [i], transform.position, transform.rotation, toyHolder [i].transform)as GameObject;
 				toyPrefabControl [i].transform.localPosition = new Vector3 (0, 0, 0);
 				toyPrefabControl [i].transform.localEulerAngles = new Vector3 (0, 70, 0);
@@ -55,7 +55,7 @@ public class Ring6ToysScript15 : MonoBehaviour {
 		}
 
 		for (int i = 0; i <3; i++) {
-			//Debug.Log ("koko" + i);
+
 			int j = 5 - i;
 			k = toy.Length-1-i;
 
@@ -73,7 +73,7 @@ public class Ring6ToysScript15 : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log ("dupa");	
+
 
 		if (Input.GetKeyDown ("b")) {
 
@@ -95,8 +95,10 @@ public class Ring6ToysScript15 : MonoBehaviour {
 
 	public void BackArrow(){
 		if (!animationRun) {
-			BackToysChange ();
+
 			StartCoroutine ("RotationMinus");
+			BackToysChange ();
+		
 		}
 		}
 
@@ -147,14 +149,23 @@ public class Ring6ToysScript15 : MonoBehaviour {
 	}
 
 
-	public void BackToysChange(){
+	public void BackToysChange ()
+	{
 		//toyPrefabControl [3].Destroy (Get);
-//		Destroy(toyPrefabControl [rotGear  -3].transform.GetChild(0).gameObject);
-	
-	}
+//		
+		if (rotGear < 2) {
+			Debug.Log ("rotGear <2 +4 = " + rotGear + 4);
+			Destroy (toyPrefabControl [rotGear + 4].transform.GetChild (0).gameObject);
+		} else {
+			int rg = rotGear - 2;
+
+			Debug.Log ("else rotGear"+rotGear+ " "+ rg);
+			Destroy (toyPrefabControl [rotGear - 2].transform.GetChild (0).gameObject);
+		}
 
 
 	}
+}
 
 
 
