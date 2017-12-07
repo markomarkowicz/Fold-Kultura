@@ -30,7 +30,14 @@ public class Ring6ToysScript15 : MonoBehaviour {
 	public int toyHPos ;
 	int toyGearNr; // index toya wrzucanego po next lub back;
 
+	public GameObject cameraPivot;
+
+	float toyRot; 
+	float cameraRot;
+	float lastClickX;
+	float lastClickY;
 	void Start () {
+
 
 		toyPrefabControl = new GameObject[toyHolder.Length];
 		toyBasePrefabControl = new GameObject[toyHolder.Length];
@@ -93,6 +100,42 @@ public class Ring6ToysScript15 : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		
+	
+		if (Input.GetMouseButtonDown (0)) {
+			Vector3 mousePos = Input.mousePosition;
+		
+			lastClickX = mousePos.x;
+			lastClickY = mousePos.y;
+		
+		}
+
+
+		if (Input.GetMouseButton(0)) {
+			
+		
+
+			Vector3 mousePos = Input.mousePosition;
+			Debug.Log (mousePos.x);
+			toyRot = mousePos.x-lastClickX;
+			cameraRot = mousePos.y-lastClickY;
+		
+		//	MouseTrackingUpd ();
+		
+		}
+
+		if (Input.GetMouseButtonUp (0)) {
+		
+			StartCoroutine ("ResetMouseRot");
+		
+		}
+
+
+		//napis.transform.localEulerAngles = new Vector3 (0, toyRot, 0);
+		toyHolder[rotGear].transform.localEulerAngles = new Vector3 (0, -toyRot/1.5f, 0);
+		cameraPivot.transform.localEulerAngles = new Vector3 (-cameraRot/5, 0, 0);
+
+
 
 
 		if (Input.GetKeyDown ("b")) {
@@ -105,22 +148,42 @@ public class Ring6ToysScript15 : MonoBehaviour {
 		}
 	}
 
-	public void NextArrow(){
 
+	void MouseTrackingUpd(){
+		
+	}
+
+
+	public void NextArrow(){
 		if (!animationRun) {
-			
 			StartCoroutine ("RotationPlus");
-		}
+				}
 	}
 
 	public void BackArrow(){
 		if (!animationRun) {
-
 			StartCoroutine ("RotationMinus");
+		}
+		}
 
-		
+
+
+	IEnumerator ResetMouseRot(){
+		float oldToyRot = toyRot;
+		float oldCameraRot = cameraRot;
+		//float oldTableRotation = tableRotation;
+		float iTime = 0;
+		while (iTime < 1) {
+			iTime += curveSpeed * Time.deltaTime;
+			toyRot = Mathf.Lerp (oldToyRot, 0, curveToy.Evaluate (iTime));
+			cameraRot = Mathf.Lerp (oldCameraRot, 0, curveToy.Evaluate (iTime));
+			//	toyHolder[1].transform.localEulerAngles = new Vector3(0, toyRot, 0);
+			yield return null;
+
+	
 		}
-		}
+	}
+
 
 
 
