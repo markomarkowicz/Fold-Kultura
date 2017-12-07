@@ -78,7 +78,7 @@ public class Ring6ToysScript15 : MonoBehaviour {
 
 			toyPrefabControl [j] = Instantiate (toy [k], transform.position, transform.rotation, toyHolder [j].transform)as GameObject;
 			toyPrefabControl [j].transform.localPosition = new Vector3 (0, 0, 0);
-			toyPrefabControl [j].transform.localEulerAngles = new Vector3 (0, 70, 0);
+			toyPrefabControl [j].transform.localEulerAngles = new Vector3 (0, 70+ toyAngleAdd, 0);
 			toyPrefabControl [j].transform.localScale = new Vector3 (1, 1, 1);
 
 			toyBasePrefabControl[j]= Instantiate (toyBase, transform.position, transform.rotation, toyHolder [j].transform)as GameObject;
@@ -206,7 +206,7 @@ public class Ring6ToysScript15 : MonoBehaviour {
 
 		toyPrefabControl[toyHPos] = Instantiate(toy[toyGearNr],transform.position, transform.rotation,toyHolder[toyHPos])as GameObject;
 		toyPrefabControl[toyHPos].transform.localPosition = new Vector3 (0, 0, 0);
-		toyPrefabControl[toyHPos].transform.localEulerAngles = new Vector3 (0, 70, 0);
+		toyPrefabControl[toyHPos].transform.localEulerAngles = new Vector3 (0, 70+toyAngleAdd, 0);
 		toyPrefabControl[toyHPos].transform.localScale = new Vector3 (1, 1, 1);
 	//	toyPrefabControl[toyHPos].transform.GetComponentInChildren<Renderer> ().material = infoMat;
 
@@ -257,7 +257,7 @@ public class Ring6ToysScript15 : MonoBehaviour {
 
 		toyPrefabControl[toyHPos] = Instantiate(toy[toyGearNr],transform.position, transform.rotation,toyHolder[toyHPos])as GameObject;
 		toyPrefabControl[toyHPos].transform.localPosition = new Vector3 (0, 0, 0);
-		toyPrefabControl[toyHPos].transform.localEulerAngles = new Vector3 (0, 70, 0);
+		toyPrefabControl[toyHPos].transform.localEulerAngles = new Vector3 (0, 70+ toyAngleAdd, 0);
 		toyPrefabControl[toyHPos].transform.localScale = new Vector3 (1, 1, 1);
 		//toyPrefabControl[toyHPos].transform.GetComponentInChildren<Renderer> ().material = infoMat;
 
