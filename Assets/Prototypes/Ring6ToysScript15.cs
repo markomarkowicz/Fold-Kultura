@@ -2,6 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//To Do
+
+// Touch only in center
+// Limit Angle
+// Change Spawn Place
+
+
+
 public class Ring6ToysScript15 : MonoBehaviour {
 	public GameObject[] toy;
 	public GameObject toyBase;
@@ -31,14 +40,22 @@ public class Ring6ToysScript15 : MonoBehaviour {
 	int toyGearNr; // index toya wrzucanego po next lub back;
 
 	public GameObject cameraPivot;
-
+	public float screenW_Low; 
+	public float screenW_Hi;
+	bool touchScreenOn = false; 
 	float toyRot; 
 	float cameraRot;
 	float lastClickX;
 	float lastClickY;
+	int mouseAreaCheck;
+
+
+
 	void Start () {
+		screenW_Low = Screen.width*0.25f;
+		screenW_Hi = Screen.width*0.75f;
 
-
+		//Debug.Log ("Screen.width= " + Screen.width); 
 		toyPrefabControl = new GameObject[toyHolder.Length];
 		toyBasePrefabControl = new GameObject[toyHolder.Length];
 		nrPrefabControl = new GameObject[toyHolder.Length];
@@ -97,17 +114,33 @@ public class Ring6ToysScript15 : MonoBehaviour {
 		}
 
 	}
+
+	void OnGui(){
 	
-	// Update is called once per frame
+		GUI.Label (new Rect(50, 50, 200,70),mouseAreaCheck.ToString());
+	}
+	
 	void Update () {
 		
 	
 		if (Input.GetMouseButtonDown (0)) {
-			Vector3 mousePos = Input.mousePosition;
-		
-			lastClickX = mousePos.x;
-			lastClickY = mousePos.y;
-		
+			Vector3 mousePosCheck = Input.mousePosition;
+
+
+
+			Vector3 mousePos;
+
+			if (mousePosCheck.x < screenW_Low && mousePosCheck.x > screenW_Hi) {
+				mousePos = Input.mousePosition;
+				mouseAreaCheck = 0;
+			}
+				if (mousePosCheck.x > screenW_Low && mousePosCheck.x < screenW_Hi) {
+					mousePos = Input.mousePosition;
+					mouseAreaCheck = 2;
+
+				lastClickX = mousePos.x;
+				lastClickY = mousePos.y;
+			}
 		}
 
 
@@ -116,10 +149,20 @@ public class Ring6ToysScript15 : MonoBehaviour {
 		
 
 			Vector3 mousePos = Input.mousePosition;
-			Debug.Log (mousePos.x);
-			toyRot = mousePos.x-lastClickX;
-			cameraRot = mousePos.y-lastClickY;
-		
+			//Debug.Log (mousePos.x);
+			if (mouseAreaCheck == 0 && mousePos.x > screenW_Low && mousePos.x < screenW_Hi) {
+				mouseAreaCheck = 1;
+			}
+			if(mouseAreaCheck == 1 && mousePos.x > screenW_Low && mousePos.x < screenW_Hi) {
+				Debug.Log ("jeden na dwa");
+				lastClickX = mousePos.x;
+				lastClickY = mousePos.y;
+				mouseAreaCheck = 2;
+			}
+			if (mousePos.x > screenW_Low && mousePos.x < screenW_Hi) {
+				toyRot = mousePos.x - lastClickX;
+				cameraRot = mousePos.y - lastClickY;
+			}
 		//	MouseTrackingUpd ();
 		
 		}
@@ -127,7 +170,7 @@ public class Ring6ToysScript15 : MonoBehaviour {
 		if (Input.GetMouseButtonUp (0)) {
 		
 			StartCoroutine ("ResetMouseRot");
-		
+			mouseAreaCheck = 0;
 		}
 
 
