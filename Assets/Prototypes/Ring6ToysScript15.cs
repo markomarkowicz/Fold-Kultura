@@ -159,7 +159,7 @@ public class Ring6ToysScript15 : MonoBehaviour {
 				lastClickY = mousePos.y;
 				mouseAreaCheck = 2;
 			}
-			if (mousePos.x > screenW_Low && mousePos.x < screenW_Hi) {
+			if (mouseAreaCheck == 2) {
 				toyRot = mousePos.x - lastClickX;
 				cameraRot = mousePos.y - lastClickY;
 			}
