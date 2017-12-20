@@ -1,15 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-
 //To Do
 
 // Touch only in center
 // Limit Angle
 // Change Spawn Place
-
-
+// GameObjects to Hold Assets
 
 public class Ring6ToysScript15 : MonoBehaviour {
 	public GameObject[] toy;
@@ -25,7 +22,7 @@ public class Ring6ToysScript15 : MonoBehaviour {
 	public AnimationCurve curveToy;
 	// Use this for initialization
 	int k;
-	float backAngle = -60f;
+	float backAngle = -600f;
 	float nextAngle = 60f;
 	bool animationRun = false;
 	float tableRotation;
@@ -55,12 +52,9 @@ public class Ring6ToysScript15 : MonoBehaviour {
 		screenW_Low = Screen.width*0.25f;
 		screenW_Hi = Screen.width*0.75f;
 
-		//Debug.Log ("Screen.width= " + Screen.width); 
 		toyPrefabControl = new GameObject[toyHolder.Length];
 		toyBasePrefabControl = new GameObject[toyHolder.Length];
 		nrPrefabControl = new GameObject[toyHolder.Length];
-			
-
 
 		tableRotation = 0;
 		gameObject.transform.localEulerAngles = new Vector3(0, tableRotation, 0);
@@ -73,15 +67,11 @@ public class Ring6ToysScript15 : MonoBehaviour {
 			nrPrefabControl [i].transform.localEulerAngles = new Vector3 (0, 70, -70);
 			nrPrefabControl [i].transform.localScale = new Vector3 (0.2f, 0.2f, 0.2f);
 			nrPrefabControl [i].transform.GetComponentInChildren<Renderer> ().material = infoMat;
-
 		}
 */
 
-
 		for (int i = 0; i < 3; i++) {
-	
 			// % toy.Length;
-		
 				toyPrefabControl [i] = Instantiate (toy [i], transform.position, transform.rotation, toyHolder [i].transform)as GameObject;
 				toyPrefabControl [i].transform.localPosition = new Vector3 (0, 0, 0);
 				toyPrefabControl [i].transform.localEulerAngles = new Vector3 (0, 70+ toyAngleAdd, 0);
@@ -95,10 +85,8 @@ public class Ring6ToysScript15 : MonoBehaviour {
 		}
 
 		for (int i = 0; i <3; i++) {
-
 			int j = 5 - i;
 			k = toy.Length-1-i;
-
 
 			toyPrefabControl [j] = Instantiate (toy [k], transform.position, transform.rotation, toyHolder [j].transform)as GameObject;
 			toyPrefabControl [j].transform.localPosition = new Vector3 (0, 0, 0);
@@ -109,8 +97,7 @@ public class Ring6ToysScript15 : MonoBehaviour {
 			toyBasePrefabControl [j].transform.localPosition = new Vector3 (0, 0, 0);
 			toyBasePrefabControl [j].transform.localEulerAngles = new Vector3 (0, 70+ toyAngleAdd, 0);
 			toyBasePrefabControl [j].transform.localScale = new Vector3 (1, 1, 1);
-
-		
+					
 		}
 
 	}
@@ -121,12 +108,9 @@ public class Ring6ToysScript15 : MonoBehaviour {
 	}
 	
 	void Update () {
-		
-	
+			
 		if (Input.GetMouseButtonDown (0)) {
 			Vector3 mousePosCheck = Input.mousePosition;
-
-
 
 			Vector3 mousePos;
 
@@ -146,15 +130,11 @@ public class Ring6ToysScript15 : MonoBehaviour {
 
 		if (Input.GetMouseButton(0)) {
 			
-		
-
 			Vector3 mousePos = Input.mousePosition;
-			//Debug.Log (mousePos.x);
 			if (mouseAreaCheck == 0 && mousePos.x > screenW_Low && mousePos.x < screenW_Hi) {
 				mouseAreaCheck = 1;
 			}
 			if(mouseAreaCheck == 1 && mousePos.x > screenW_Low && mousePos.x < screenW_Hi) {
-				Debug.Log ("jeden na dwa");
 				lastClickX = mousePos.x;
 				lastClickY = mousePos.y;
 				mouseAreaCheck = 2;
@@ -163,8 +143,6 @@ public class Ring6ToysScript15 : MonoBehaviour {
 				toyRot = mousePos.x - lastClickX;
 				cameraRot = mousePos.y - lastClickY;
 			}
-		//	MouseTrackingUpd ();
-		
 		}
 
 		if (Input.GetMouseButtonUp (0)) {
@@ -173,13 +151,19 @@ public class Ring6ToysScript15 : MonoBehaviour {
 			mouseAreaCheck = 0;
 		}
 
-
 		//napis.transform.localEulerAngles = new Vector3 (0, toyRot, 0);
+
 		toyHolder[rotGear].transform.localEulerAngles = new Vector3 (0, -toyRot/1.5f, 0);
+		if (cameraRot < -707) {
+			cameraRot = -707;
+		}
+
+		if (cameraRot > 33) {
+			cameraRot = 33;
+		}
 		cameraPivot.transform.localEulerAngles = new Vector3 (-cameraRot/5, 0, 0);
-
-
-
+	
+		Debug.Log (cameraRot);
 
 		if (Input.GetKeyDown ("b")) {
 
@@ -190,12 +174,6 @@ public class Ring6ToysScript15 : MonoBehaviour {
 			NextArrow ();
 		}
 	}
-
-
-	void MouseTrackingUpd(){
-		
-	}
-
 
 	public void NextArrow(){
 		if (!animationRun) {
@@ -226,8 +204,6 @@ public class Ring6ToysScript15 : MonoBehaviour {
 	
 		}
 	}
-
-
 
 
 	IEnumerator RotationPlus(){
