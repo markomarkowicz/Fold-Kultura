@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+// rozstawia toysy by sprawdzić czy mają dobrze ustawione skale pozycje i rotacje
 
 public class ToyCheckMachineScript : MonoBehaviour {
 	public GameObject toyBase;

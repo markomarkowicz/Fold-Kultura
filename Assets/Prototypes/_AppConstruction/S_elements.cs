@@ -12,6 +12,7 @@ public class S_elements : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	//	addons= new GameObject[7];
+		//Instantiate(addons[2],transform.position,transform.rotation); 
 		
 	}
 	
