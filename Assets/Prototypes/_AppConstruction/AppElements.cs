@@ -28,10 +28,10 @@ public class AppElements : MonoBehaviour {
 
 
 		toyBase = toySet[tb].GetComponent<S_elements> ().baseModel;
-		toyMaterial = toySet [tb].GetComponent<S_elements> ().matToys;
+	//	toyMaterial = toySet [tb].GetComponent<S_elements> ().matToys;
 		Instantiate (toyBase, testerD.transform.position, testerD.transform.rotation, testerD.transform);
-		toyMaterial = GetComponentInChildren<Material> ();
-
+	//	toyMaterial = GetComponentInChildren<Material> ();
+	//	toyMaterial = 
 		toyBase.transform.localPosition = Vector3.zero;
 
 		toyAddon = toySet [tb].GetComponent<S_elements> ().addons [toyadd];
