@@ -1,4 +1,7 @@
 ﻿using Interfaces;
+using Controllers;
+using DG.Tweening;
+using UnityEngine;
 
 namespace MenuViews
 {
@@ -7,7 +10,7 @@ namespace MenuViews
 
 		public void PlayButton()
 		{
-			
+			MainController.Instance.ShowView(Controllers.MenuViews.ChooseModel);
 		}
 	}
 }

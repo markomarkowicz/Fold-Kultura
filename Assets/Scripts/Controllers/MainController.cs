@@ -13,12 +13,11 @@ namespace Controllers
 		private BaseMenuView _currentView;
 
 		private Dictionary<MenuViews, BaseMenuView> _views;
-
 		
-		[SerializeField]private Camera _viewCamera;
+		public Camera _viewCamera;
 
 		[SerializeField]private MainMenuView _mainMenuView;
-	
+		[SerializeField]private ChooseModelView _chooseModelView;
 	
 		private void Awake()
 		{
@@ -39,10 +38,10 @@ namespace Controllers
 
 		void Init()
 		{
-			Debug.Log("Init");
 			_views = new Dictionary<MenuViews, BaseMenuView>()
 			{
-				{MenuViews.Start,_mainMenuView}
+				{MenuViews.Start,_mainMenuView},
+				{MenuViews.ChooseModel,_chooseModelView}
 			};
 			ShowView(MenuViews.Start);
 		}
@@ -56,7 +55,6 @@ namespace Controllers
 			_currentView.Show();
 			UiController.Instance.SetViewFor(_currentView);
 		}
-	
 	}
 	
 
