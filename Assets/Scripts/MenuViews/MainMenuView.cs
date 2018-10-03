@@ -1,13 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Interfaces;
-using UnityEngine;
+﻿using Interfaces;
 
-public class MainMenuView : BaseMenuView,IPlayButton {
+namespace MenuViews
+{
+	public class MainMenuView : BaseMenuView,IPlayButton {
 
 
-	public void PlayButton()
-	{
-		
+		public void PlayButton()
+		{
+			
+		}
 	}
 }

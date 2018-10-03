@@ -1,49 +1,60 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Interfaces;
 using UnityEngine;
 
-public class UIController : MonoBehaviour
+namespace Controllers
 {
-	public static UIController Instance;
-	
-	public GameObject play, next, back, rightArrow, leftArrow;
-
-	void Awake()
+	public class UiController : MonoBehaviour
 	{
-		if (Instance != null)
+		public static UiController Instance;
+	
+		[SerializeField] private GameObject _play, _next, _back, _rightArrow, _leftArrow; 
+
+		void Awake()
 		{
-			Instance = this;
+			if (Instance == null)
+			{
+				Instance = this;
+			}
+			else
+			{
+				Destroy(Instance);
+			}
 		}
-		else
+
+		public void PlayButton()
 		{
-			Destroy(Instance);
+		
 		}
-	}
+	
+		public void NextButton()
+		{
+		
+		}
+	
+		public void BackButton()
+		{
+		
+		}
 
-	public void PlayButton()
-	{
+		public void RightArrow()
+		{
 		
-	}
+		}
 	
-	public void NextButton()
-	{
+		public void LeftArrow()
+		{
 		
-	}
-	
-	public void BackButton()
-	{
-		
-	}
+		}
 
-	public void RightArrow()
-	{
-		
+		public void SetViewFor(object view)
+		{
+			Debug.Log("SetViewFor");
+			_rightArrow.SetActive(view is IArrowButtons);
+			_leftArrow.SetActive(view is IArrowButtons);
+			_next.SetActive(view is INavigateButtons);
+			_back.SetActive(view is INavigateButtons);
+			_play.SetActive(view is IPlayButton);
+		}
+	
 	}
-	
-	public void LeftArrow()
-	{
-		
-	}
-	
-	
 }

@@ -3,81 +3,84 @@ using System.Collections.Generic;
 using Interfaces;
 using UnityEngine;
 
-public class EscapeButtonController : MonoBehaviour
+namespace Controllers
 {
+	public class EscapeButtonController : MonoBehaviour
+	{
 
-	public static EscapeButtonController Instance;
+		public static EscapeButtonController Instance;
 	
-	private void Awake()
-	{
-		if (Instance != null)
+		private void Awake()
 		{
-			Instance = this;
-			escapableStack = new ItsAlmostAStack<IEscapableView>();
+			if (Instance == null)
+			{
+				Instance = this;
+				escapableStack = new ItsAlmostAStack<IEscapableView>();
+			}
+			else
+			{
+				Destroy(gameObject);
+			}
 		}
-		else
+
+		private static ItsAlmostAStack<IEscapableView> escapableStack;
+
+		public static void Register(IEscapableView view)
 		{
-			Destroy(gameObject);
+			escapableStack.Push(view);
 		}
-	}
-
-	private static ItsAlmostAStack<IEscapableView> escapableStack;
-
-	public static void Register(IEscapableView view)
-	{
-		escapableStack.Push(view);
-	}
 	
-	public static void Deregister(IEscapableView view)
-	{
-		escapableStack.Remove(view);
-	}
-
-	private static void EscapeAction()
-	{
-		if (escapableStack.Lenght > 0)
+		public static void Deregister(IEscapableView view)
 		{
-			escapableStack.Pop().EscapeAction();
+			escapableStack.Remove(view);
+		}
+
+		private static void EscapeAction()
+		{
+			if (escapableStack.Lenght > 0)
+			{
+				escapableStack.Pop().EscapeAction();
+			}
+		}
+
+		private void Update()
+		{
+			if (Input.GetKeyDown(KeyCode.Escape))
+				EscapeAction();
 		}
 	}
 
-	private void Update()
+	public class ItsAlmostAStack<T>
 	{
-		if (Input.GetKeyDown(KeyCode.Escape))
-			EscapeAction();
-	}
-}
+		private List<T> items = new List<T>();
 
-public class ItsAlmostAStack<T>
-{
-	private List<T> items = new List<T>();
-
-	public int Lenght
-	{
-		get { return items.Count; }
-	}
-	public void Push(T item)
-	{
-		items.Add(item);
-	}
-	public T Pop()
-	{
-		if (items.Count > 0)
+		public int Lenght
 		{
-			T temp = items[items.Count - 1];
-			items.RemoveAt(items.Count - 1);
-			return temp;
+			get { return items.Count; }
 		}
-		else
-			return default(T);
-	}
-	public void Remove(int itemAtPosition)
-	{
-		items.RemoveAt(itemAtPosition);
-	}
+		public void Push(T item)
+		{
+			items.Add(item);
+		}
+		public T Pop()
+		{
+			if (items.Count > 0)
+			{
+				T temp = items[items.Count - 1];
+				items.RemoveAt(items.Count - 1);
+				return temp;
+			}
+			else
+				return default(T);
+		}
+		public void Remove(int itemAtPosition)
+		{
+			items.RemoveAt(itemAtPosition);
+		}
 	
-	public void Remove(T item)
-	{
-		items.Remove(item);
+		public void Remove(T item)
+		{
+			items.Remove(item);
+		}
 	}
 }

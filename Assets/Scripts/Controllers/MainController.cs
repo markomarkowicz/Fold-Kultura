@@ -1,35 +1,71 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using MenuViews;
 using UnityEngine;
 
-public class MainController : MonoBehaviour
+namespace Controllers
 {
-	public static MainController Instance;
-	
-	private MenuStates state = MenuStates.Start;
-	[SerializeField]private Camera viewCamera;
-	
-	
-
-	private void Awake()
+	public class MainController : MonoBehaviour
 	{
-		if (Instance != null)
+		public static MainController Instance;
+	
+		private MenuViews _currentViewEnum = MenuViews.Start;
+		private BaseMenuView _currentView;
+
+		private Dictionary<MenuViews, BaseMenuView> _views;
+
+		
+		[SerializeField]private Camera _viewCamera;
+
+		[SerializeField]private MainMenuView _mainMenuView;
+	
+	
+		private void Awake()
 		{
-			Instance = this;
+			if (Instance == null)
+			{
+				Instance = this;
+			}
+			else
+			{
+				Destroy(gameObject);
+			}
 		}
-		else
+
+		private void Start()
 		{
-			Destroy(gameObject);
+			Init();
 		}
+
+		void Init()
+		{
+			Debug.Log("Init");
+			_views = new Dictionary<MenuViews, BaseMenuView>()
+			{
+				{MenuViews.Start,_mainMenuView}
+			};
+			ShowView(MenuViews.Start);
+		}
+		
+		public void ShowView(MenuViews view)
+		{
+			if (!_views.ContainsKey(view)) return;
+			if (_currentView != null)
+				_currentView.Hide();
+			_currentView = _views[view];
+			_currentView.Show();
+			UiController.Instance.SetViewFor(_currentView);
+		}
+	
 	}
 	
-	
-}
 
-public enum MenuStates
-{
-	Start,
-	ChooseModel,
-	ChooseTexture,
-	ViewModel
+
+	public enum MenuViews
+	{
+		Start,
+		ChooseModel,
+		ChooseTexture,
+		ViewModel
+	}
 }
